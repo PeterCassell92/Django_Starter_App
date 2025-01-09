@@ -3,13 +3,11 @@ from django.views.generic import TemplateView
 
 #from django.http import HttpResponse
 
-
 # def index(request):
 #     return HttpResponse("Hello, world. You're at the dash index.")
 
 
 def index(request):
-    print('Here')
     return render(request, 'dash/index.html')
 
 def dash_view(request):
