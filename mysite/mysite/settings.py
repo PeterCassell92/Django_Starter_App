@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'polls.apps.PollsConfig',
+    'dash.apps.DashConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -84,7 +85,7 @@ DATABASES = {
     # },
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':  'django',
+        'NAME':  'django_polls',
         'HOST': 'localhost',
         'USER': 'postgres',
         'PASSWORD': PG_ADMIN_PWD,

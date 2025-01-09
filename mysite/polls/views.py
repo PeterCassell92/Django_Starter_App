@@ -61,7 +61,7 @@ def vote(request, question_id):
 #generic views  - class based views
 
 class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
+    template_name = 'polls/polls_home.html'
     context_object_name = 'latest_question_list'
 
     """
