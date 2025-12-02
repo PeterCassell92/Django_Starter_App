@@ -1,0 +1,17 @@
+[project]
+name = "django-starter-app"
+version = "0.1.0"
+description = "Django starter application built from tutorials"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "Django>=3.2,<5.0",
+    "psycopg2-binary>=2.9,<3.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = []
