@@ -10,18 +10,21 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load environment variables from .env file in project root
+load_dotenv(BASE_DIR.parent / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-with open(Path(__file__).resolve().parent / 'secret_key.txt', 'rt') as key_file:
-            SECRET_KEY = key_file.read()
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-default-key-change-this')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -75,21 +78,15 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-with open(Path(__file__).resolve().parent / 'pg_admin_pwd.txt', 'rt') as key_file:
-    PG_ADMIN_PWD = key_file.read()
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # },
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':  'django_polls',
-        'HOST': 'localhost',
-        'USER': 'postgres',
-        'PASSWORD': PG_ADMIN_PWD,
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'django_polls'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', ''),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 

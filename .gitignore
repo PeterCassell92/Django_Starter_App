@@ -1,5 +1,5 @@
-**/pg_admin_pwd.txt
-**/secret_key.txt
+# Environment variables
+.env
 
 # Python
 __pycache__/

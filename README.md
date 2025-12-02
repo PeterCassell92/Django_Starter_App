@@ -44,24 +44,29 @@ uv sync
 
 This will create a `.venv` virtual environment and install Django and PostgreSQL dependencies.
 
-### 3. Configure Database
+### 3. Configure Environment Variables
 
-Create required credential files in `mysite/mysite/`:
+Create a `.env` file in the project root by copying the example:
 
-**mysite/mysite/secret_key.txt**
-```
-your-django-secret-key-here
-```
-
-**mysite/mysite/pg_admin_pwd.txt**
-```
-your-postgresql-password-here
+```bash
+cp .env.example .env
 ```
 
-Ensure your PostgreSQL server is running with:
-- Database name: `django_polls`
-- User: `postgres`
-- Port: `5432`
+Edit `.env` and set your values:
+
+```bash
+# Django Settings
+DJANGO_SECRET_KEY=your-secret-key-here-generate-a-random-string
+
+# Database Configuration
+DB_NAME=django_polls
+DB_HOST=localhost
+DB_USER=postgres
+DB_PASSWORD=your-postgresql-password-here
+DB_PORT=5432
+```
+
+Ensure your PostgreSQL server is running and the database exists.
 
 ### 4. Run Migrations
 
@@ -109,6 +114,7 @@ uv run python manage.py startapp appname
 
 - Django (>=3.2, <5.0)
 - psycopg2-binary (>=2.9, <3.0)
+- python-dotenv (>=1.0.0)
 
 Dependencies are managed in both `pyproject.toml` and `requirements.txt`.
 

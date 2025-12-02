@@ -26,14 +26,15 @@ Each app defines its own URL patterns with namespaced routing (`app_name = 'poll
 
 ### Database Configuration
 
-The project uses **PostgreSQL** (not SQLite). Database credentials are loaded from separate files in [mysite/mysite/settings.py](mysite/mysite/settings.py:78-93):
-- Secret key: `mysite/mysite/secret_key.txt`
-- PostgreSQL password: `mysite/mysite/pg_admin_pwd.txt`
-- Database name: `django_polls`
-- User: `postgres`
-- Port: `5432`
+The project uses **PostgreSQL** (not SQLite). Database credentials are loaded from environment variables via a `.env` file in [mysite/mysite/settings.py](mysite/mysite/settings.py:82-91):
+- `DJANGO_SECRET_KEY`: Django secret key
+- `DB_NAME`: Database name (default: `django_polls`)
+- `DB_HOST`: Database host (default: `localhost`)
+- `DB_USER`: Database user (default: `postgres`)
+- `DB_PASSWORD`: PostgreSQL password (required)
+- `DB_PORT`: Database port (default: `5432`)
 
-These credential files are not in version control and must be created locally.
+The `.env` file is not in version control. Use [.env.example](.env.example) as a template.
 
 ### Template Organization
 
@@ -69,13 +70,20 @@ source .venv/bin/activate  # On Linux/Mac
 
 - **Django** (>=3.2, <5.0): Web framework
 - **psycopg2-binary** (>=2.9, <3.0): PostgreSQL adapter
+- **python-dotenv** (>=1.0.0): Environment variable management
 
-### Required Configuration Files
+### Environment Configuration
 
-Before running the application, create these credential files in `mysite/mysite/`:
+Create a `.env` file in the project root by copying [.env.example](.env.example):
 
-1. `secret_key.txt` - Django secret key
-2. `pg_admin_pwd.txt` - PostgreSQL password
+```bash
+cp .env.example .env
+```
+
+Then edit `.env` with your actual values:
+- `DJANGO_SECRET_KEY`: Generate a random secret key for Django
+- `DB_PASSWORD`: Your PostgreSQL password
+- Other database settings as needed (defaults are provided in [settings.py](mysite/mysite/settings.py:82-91))
 
 ## Development Commands
 
